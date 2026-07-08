@@ -1,23 +1,18 @@
-# Core runtime dependencies for the wildlife detection pipeline.
-# Pinned to lower bounds that are known to be compatible; see pyproject.toml
-# for the authoritative dependency specification.
+# =============================================================================
+# Deployment manifest for hosted demos (Streamlit Community Cloud / HF Spaces).
+#
+# The key line is the CPU-only PyTorch index below: it makes pip download the
+# lightweight CPU wheels instead of the multi-GB CUDA build, which keeps the
+# install within the free tier's disk/memory limits. ultralytics transitively
+# pulls the rest of the stack (opencv, pillow, pyyaml, pandas, matplotlib, ...).
+#
+# For local / GPU development install the package instead: `pip install -e .`
+# (dependencies are declared authoritatively in pyproject.toml).
+# =============================================================================
+--extra-index-url https://download.pytorch.org/whl/cpu
 
-# Deep learning / detection
-ultralytics>=8.2.0        # YOLOv5/YOLOv8 models, training + inference backend
-torch>=2.2.0              # installed transitively by ultralytics, pinned for clarity
-torchvision>=0.17.0
-
-# Computer vision / IO
-opencv-python>=4.9.0      # real-time video capture, drawing, streaming
-Pillow>=10.2.0
-numpy>=1.26.0
-
-# Data / config / utilities
-PyYAML>=6.0
-pandas>=2.2.0
-tqdm>=4.66.0
-matplotlib>=3.8.0
-scikit-learn>=1.4.0       # stratified split + auxiliary metrics
-
-# Demo UI (also used as the deployment manifest for Streamlit Community Cloud)
 streamlit>=1.31.0
+ultralytics>=8.2.0
+torch>=2.2.0
+torchvision>=0.17.0
+numpy<2.0
