@@ -1,0 +1,39 @@
+# =============================================================================
+# Dataset configuration for the wildlife detection pipeline.
+#
+# `wildlife-detect prepare` consumes this file to:
+#   1. scan an annotated source dataset (images + YOLO-format .txt labels),
+#   2. validate every label file against the class list,
+#   3. split it into train/val/test with a fixed seed,
+#   4. emit a YOLO `dataset.yaml` under `processed_dir` for training.
+# =============================================================================
+
+# Source of annotated data. Expected layout (YOLO format):
+#   raw_dir/
+#     images/ *.jpg|*.png
+#     labels/ *.txt   (one row per box: "class cx cy w h", normalised 0-1)
+raw_dir: data/raw
+processed_dir: data/processed
+
+# Reproducible split ratios (must sum to 1.0).
+split:
+  train: 0.8
+  val: 0.1
+  test: 0.1
+seed: 42
+
+# Copy images into the split folders (true) or reference them by symlink (false).
+copy_images: false
+
+# Ordered class names. Index == class id used in the label files.
+names:
+  0: deer
+  1: wild_boar
+  2: elephant
+  3: bear
+  4: monkey
+  5: fox
+  6: leopard
+  7: tiger
+  8: wolf
+  9: rabbit

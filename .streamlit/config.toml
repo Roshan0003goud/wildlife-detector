@@ -1,0 +1,7 @@
+# Streamlit theme + server settings for the hosted demo.
+[theme]
+primaryColor = "#2e8b57"
+base = "light"
+
+[server]
+maxUploadSize = 20

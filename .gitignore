@@ -1,0 +1,59 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.installed.cfg
+*.egg
+
+# ---- Virtual environments ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- Testing / coverage ----
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.mypy_cache/
+.ruff_cache/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- ML artifacts / data (kept out of VCS) ----
+runs/
+weights/
+*.pt
+*.onnx
+*.engine
+wandb/
+mlruns/
+
+# Datasets: keep folder structure, ignore heavy contents
+data/raw/**
+data/processed/**
+!data/**/.gitkeep
+!data/README.md
+
+# Model outputs / media
+outputs/
+*.avi
+*.mp4
+!assets/*.mp4
+
+# ---- OS / editor / tooling ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+.claude/

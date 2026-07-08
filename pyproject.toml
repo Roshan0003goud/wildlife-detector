@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wildlife-detector"
+version = "1.0.0"
+description = "Real-time wild animal detection with YOLOv5 and OpenCV."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Roshan Goud", email = "roshangoudr@gmail.com" }]
+keywords = ["yolov5", "object-detection", "wildlife", "computer-vision", "opencv"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "ultralytics>=8.2.0",
+    "opencv-python>=4.9.0",
+    "numpy>=1.26.0",
+    "Pillow>=10.2.0",
+    "PyYAML>=6.0",
+    "pandas>=2.2.0",
+    "tqdm>=4.66.0",
+    "matplotlib>=3.8.0",
+    "scikit-learn>=1.4.0",
+]
+
+[project.optional-dependencies]
+app = ["streamlit>=1.31.0"]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.3.0",
+    "mypy>=1.9.0",
+    "pre-commit>=3.6.0",
+]
+
+[project.scripts]
+wildlife-detect = "wildlife_detector.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/roshangoud/wildlife-detector"
+Repository = "https://github.com/roshangoud/wildlife-detector"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+wildlife_detector = ["py.typed"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["N812"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_unused_ignores = true
+ignore_missing_imports = true
+packages = ["wildlife_detector"]
