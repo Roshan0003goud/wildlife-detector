@@ -14,6 +14,9 @@
 
 ---
 
+> **Live demo:** deploy in one click →
+> [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/deploy?repository=Roshan0003goud/wildlife-detector&branch=main&mainModule=streamlit_app.py)
+
 A production-minded computer-vision system that detects wild animals in images and
 video in **real time**, tracks them across frames, and reports rigorous detection
 metrics. Built around **YOLOv5** for detection and **OpenCV** for the live video
