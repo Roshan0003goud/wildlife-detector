@@ -27,6 +27,12 @@ pipeline, the project ships a clean, config-driven CLI covering the full lifecyc
 > as deer, wild boar, elephants or bears entering farmland, highways or protected
 > zones from camera-trap or CCTV streams.
 
+## 📚 Documentation
+
+Full end-to-end project documentation — from initial setup through dataset,
+training, evaluation, tracking, and deployment — lives in
+**[docs/PROJECT_DOCUMENTATION.md](docs/PROJECT_DOCUMENTATION.md)**.
+
 ## 📊 Results
 
 Trained on a **custom dataset of 2,000+ annotated images** across 10 wildlife
