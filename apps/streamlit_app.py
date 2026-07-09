@@ -26,6 +26,13 @@ from wildlife_detector.utils.viz import color_palette, draw_detections  # noqa: 
 # works even before a custom model has been trained.
 DEMO_MODEL = "yolov5su.pt"
 
+# The animal categories the pretrained COCO model can recognise. In demo mode we
+# optionally keep only these so the app reads clearly as a wildlife detector
+# (and stray classes like "sports ball" are hidden).
+COCO_ANIMALS = {
+    "bird", "cat", "dog", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe",
+}
+
 st.set_page_config(page_title="Wildlife Detector", page_icon="🦌", layout="wide")
 
 
@@ -48,8 +55,9 @@ def main() -> None:
     with st.sidebar:
         st.header("Configuration")
         weights = st.text_input("Weights path or model name", value=_default_weights())
-        conf = st.slider("Confidence threshold", 0.05, 0.95, 0.25, 0.05)
+        conf = st.slider("Confidence threshold", 0.05, 0.95, 0.30, 0.05)
         iou = st.slider("NMS IoU threshold", 0.1, 0.9, 0.45, 0.05)
+        animals_only = st.checkbox("Show animals only", value=True)
         st.markdown("---")
         st.markdown("Train a custom model with `wildlife-detect train`, then point "
                     "the field above at `weights/best.pt` for the 10 wildlife classes.")
@@ -85,6 +93,11 @@ def main() -> None:
         st.code(traceback.format_exc())
         st.stop()
         return
+
+    # In demo mode the generic model can emit non-animal classes; optionally drop
+    # them so the output reads as a clean wildlife detector.
+    if using_demo and animals_only:
+        detections = [d for d in detections if d.class_name in COCO_ANIMALS]
 
     annotated = draw_detections(
         image.copy(),
