@@ -1,10 +1,10 @@
 # =============================================================================
-# Deployment manifest for hosted demos (Streamlit Community Cloud / HF Spaces).
+# Deployment manifest for hosted demos (Streamlit Community Cloud).
 #
-# The key line is the CPU-only PyTorch index below: it makes pip download the
-# lightweight CPU wheels instead of the multi-GB CUDA build, which keeps the
-# install within the free tier's disk/memory limits. ultralytics transitively
-# pulls the rest of the stack (opencv, pillow, pyyaml, pandas, matplotlib, ...).
+# - CPU-only PyTorch wheels (index below) keep the install within the free
+#   tier's disk/memory limits instead of pulling the multi-GB CUDA build.
+# - opencv-python-headless has NO libGL/GLib system dependency, so no
+#   packages.txt / apt step is needed (which broke on Streamlit's Debian image).
 #
 # For local / GPU development install the package instead: `pip install -e .`
 # (dependencies are declared authoritatively in pyproject.toml).
@@ -15,3 +15,4 @@ streamlit>=1.31.0
 ultralytics>=8.2.0
 torch>=2.2.0
 torchvision>=0.17.0
+opencv-python-headless>=4.9.0
