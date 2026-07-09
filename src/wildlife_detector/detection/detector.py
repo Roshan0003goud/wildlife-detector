@@ -70,8 +70,8 @@ class WildlifeDetector:
             from ultralytics import YOLO
         except ImportError as exc:  # pragma: no cover - environment dependent
             raise RuntimeError(
-                "The 'ultralytics' package is required for inference. Install it "
-                "with `pip install -e .` or `pip install ultralytics`."
+                "Could not import the inference backend (ultralytics/torch). "
+                f"Underlying import error: {exc!r}"
             ) from exc
         if not Path(self.weights).is_file():
             # A bare model alias (e.g. "yolov5su.pt") is auto-downloaded by

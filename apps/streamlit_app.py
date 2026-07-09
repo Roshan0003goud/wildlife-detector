@@ -71,11 +71,20 @@ def main() -> None:
     from PIL import Image  # local import keeps startup light
 
     image = np.array(Image.open(uploaded).convert("RGB"))[:, :, ::-1]  # RGB -> BGR
-    detector = load_detector(weights, conf, iou)
 
-    start = time.perf_counter()
-    detections = detector.predict(image.copy())
-    elapsed_ms = (time.perf_counter() - start) * 1000
+    # Surface the *real* error in the UI (Streamlit redacts uncaught exceptions),
+    # so deployment issues are diagnosable without digging through server logs.
+    try:
+        detector = load_detector(weights, conf, iou)
+        start = time.perf_counter()
+        detections = detector.predict(image.copy())
+        elapsed_ms = (time.perf_counter() - start) * 1000
+    except Exception:  # noqa: BLE001 - we deliberately show any failure to the user
+        import traceback
+        st.error("Model failed to load or run. Full error:")
+        st.code(traceback.format_exc())
+        st.stop()
+        return
 
     annotated = draw_detections(
         image.copy(),
